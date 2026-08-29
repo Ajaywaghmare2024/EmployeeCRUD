@@ -6,13 +6,16 @@ namespace EmployeeCRUD.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _repo;
-        public EmployeeController(IEmployeeRepository repo)
+        private readonly ILogger<EmployeeController> _logger;
+        public EmployeeController(IEmployeeRepository repo, ILogger<EmployeeController> logger)
         {
             _repo = repo;
+            _logger = logger;
         }
         public IActionResult Index()
         {
             var empList = _repo.GetAll();
+            _logger.LogInformation("List of Employee",empList);
             return View(empList);
         }
         public IActionResult GetByEmpById(int empId)
