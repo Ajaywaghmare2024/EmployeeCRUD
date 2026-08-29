@@ -21,6 +21,7 @@ namespace EmployeeCRUD.Controllers
         public IActionResult GetByEmpById(int empId)
         {
             var emp = _repo.GetEmployeeById(empId);
+            _logger.LogInformation("Employee details", emp);
             return View(emp);
         }
     }
